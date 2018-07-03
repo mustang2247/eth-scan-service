@@ -10,7 +10,7 @@ public interface IRoleService extends JpaRepository<Role, Integer> {
 
     public Role findBySn(String sn);
 
-    public Role findById(Integer id);
+//    public Role findById(Integer id);
 
     @Query("SELECT rm.mid FROM RoleMenu rm WHERE rm.rid=?1")
     public List<Integer> listRoleMenuIds(Integer roleId);

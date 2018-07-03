@@ -67,7 +67,7 @@ public class MenuController {
     @AdminAuth(name="修改菜单", orderNum=3, type="2")
     @RequestMapping(value="update/{id}", method= RequestMethod.GET)
     public String update(Model model, @PathVariable Integer id, HttpServletRequest request) {
-        Menu m = menuService.findById(id);
+        Menu m = menuService.findById(id).get();
         model.addAttribute("menu", m);
         return "admin/menu/update";
     }
@@ -76,7 +76,7 @@ public class MenuController {
     @RequestMapping(value="update/{id}", method= RequestMethod.POST)
     public String update(Model model, @PathVariable Integer id, Menu menu, HttpServletRequest request) {
         if(TokenTools.isNoRepeat(request)) {
-            Menu m = menuService.findById(id);
+            Menu m = menuService.findById(id).get();
             m.setIcon(menu.getIcon());
             menuService.save(m);
         }

@@ -34,19 +34,16 @@ import static org.web3j.tx.ManagedTransaction.GAS_PRICE;
 public class Web3jService {
 
     private final Logger log = LoggerFactory.getLogger(Web3jService.class);
-
     private Web3j web3;
 
 //    private String contractAddress;
 
     private BigInteger nextBlockNumber;
 
-    private Map<String, Integer> decimals = new HashMap<>();
-
-    private TOKEN token;
+//    private Map<String, Integer> decimals = new HashMap<>();
+//    private TOKEN token;
 
     private int retryTimes;
-
     private ExecutorService executor;
 
     /**
@@ -72,7 +69,7 @@ public class Web3jService {
                 threadNumber);
         nextBlockNumber = BigInteger.valueOf(startBlockNumber);
         this.retryTimes = retryTimes;
-        token = createToken(contractAddress);
+        createToken(contractAddress);
         executor = Executors.newFixedThreadPool(threadNumber);
     }
 

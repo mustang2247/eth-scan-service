@@ -2,27 +2,22 @@ package com.open.coinnews;
 
 import com.open.coinnews.basic.tools.ConfigTools;
 import com.open.coinnews.service.ScheduledTaskService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-//@Slf4j
+@Slf4j
 @SpringBootApplication
 @EnableScheduling
 public class StartApplication implements CommandLineRunner{
-    private static final Logger logger = LoggerFactory.getLogger(StartApplication.class);
+//    private static final Logger logger = LoggerFactory.getLogger(StartApplication.class);
 
     @Autowired
     private ScheduledTaskService scheduledTaskService;
@@ -43,21 +38,21 @@ public class StartApplication implements CommandLineRunner{
             }
         }
 
-        logger.info("start startBlockNumber: " + startBlockNumber);
+        log.info("start startBlockNumber: " + startBlockNumber);
         SpringApplication.run(StartApplication.class, args);
 
 
     }
 
-    @Bean
-    public EmbeddedServletContainerCustomizer containerCustomizer() {
-        return new EmbeddedServletContainerCustomizer(){
-            @Override
-            public void customize(ConfigurableEmbeddedServletContainer container) {
-                container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"));
-            }
-        };
-    }
+//    @Bean
+//    public EmbeddedServletContainerCustomizer containerCustomizer() {
+//        return new EmbeddedServletContainerCustomizer(){
+//            @Override
+//            public void customize(ConfigurableEmbeddedServletContainer container) {
+//                container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/404"));
+//            }
+//        };
+//    }
 
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -86,7 +81,7 @@ public class StartApplication implements CommandLineRunner{
             configTools.setStartBlockNumber(startBlockNumber);
         }
 
-        logger.info("启动扫描 ");
+        log.info("启动扫描 ");
         scheduledTaskService.startBlockChainScan();
     }
 }

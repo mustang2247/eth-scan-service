@@ -1,7 +1,6 @@
 package com.open.coinnews.web.controller.admin;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.open.coinnews.app.model.Invite;
 import com.open.coinnews.app.service.IInviteService;
 import com.open.coinnews.basic.auth.annotations.AdminAuth;
@@ -17,8 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,7 +50,7 @@ public class AdminInviteController {
     @AdminAuth(name="修改用户", orderNum=3, type="2")
     @RequestMapping(value="update/{id}", method=RequestMethod.GET)
     public String update(Model model, @PathVariable Integer id, HttpServletRequest request) {
-        Invite article = inviteService.findOne(id);
+        Invite article = inviteService.findById(id).get();
 
         logger.info(JSON.toJSONString(article));
 
@@ -63,7 +64,7 @@ public class AdminInviteController {
     @RequestMapping(value="update/{id}", method=RequestMethod.POST)
     public String update(Model model, @PathVariable Integer id, Invite article, HttpServletRequest request) {
         if(TokenTools.isNoRepeat(request)) {
-            Invite art = inviteService.findOne(id);
+            Invite art = inviteService.findById(id).get();
             MyBeanUtils.copyProperties(article, art, new String[]{"id","token", "refererCode", "inviteCode", "l"});
 
             logger.info(JSON.toJSONString(art));
@@ -78,7 +79,7 @@ public class AdminInviteController {
     String delete(@PathVariable Integer id) {
         try {
             logger.info(id.toString());
-            inviteService.delete(id);
+            inviteService.deleteById(id);
             return "1";
         } catch (Exception e) {
             return "0";

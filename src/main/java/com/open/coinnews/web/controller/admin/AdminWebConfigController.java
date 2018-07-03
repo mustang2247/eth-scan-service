@@ -33,7 +33,7 @@ public class AdminWebConfigController {
     @RequestMapping(value="webConfig", method= RequestMethod.GET)
     public String webConfig(Model model, HttpServletRequest request) {
 
-        WebConfigInfo webConfigInfo = webConfigInfoService.findOne(1);
+        WebConfigInfo webConfigInfo = webConfigInfoService.findById(1).get();
         if (webConfigInfo == null){
             webConfigInfo = new WebConfigInfo();
         }

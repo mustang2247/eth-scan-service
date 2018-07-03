@@ -117,7 +117,7 @@ public class AdminPartnerController {
     @AdminAuth(name = "修改成员", orderNum = 3, type = "2")
     @RequestMapping(value = "update/{id}", method = RequestMethod.GET)
     public String update(Model model, @PathVariable Integer id, HttpServletRequest request) {
-        model.addAttribute("partner", partnerService.findOne(id));
+        model.addAttribute("partner", partnerService.findById(id).get());
         return "admin/partner/update";
     }
 
@@ -125,7 +125,7 @@ public class AdminPartnerController {
     @RequestMapping(value = "update/{id}", method = RequestMethod.POST)
     public String update(Model model, @PathVariable Integer id, Partner partner, HttpServletRequest request) {
         if (TokenTools.isNoRepeat(request)) {
-            Partner p = partnerService.findOne(id);
+            Partner p = partnerService.findById(id).get();
             MyBeanUtils.copyProperties(partner, p, new String[]{"id", "userId", "username", "createDate"});
 
             partnerService.save(p);
@@ -138,7 +138,7 @@ public class AdminPartnerController {
     public @ResponseBody
     String delete(@PathVariable Integer id) {
         try {
-            partnerService.delete(id);
+            partnerService.deleteById(id);
             return "1";
         } catch (Exception e) {
             return "0";

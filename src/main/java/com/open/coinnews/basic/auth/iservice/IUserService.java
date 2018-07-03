@@ -11,7 +11,7 @@ public interface IUserService extends JpaRepository<User, Integer>, JpaSpecifica
 
     public User findByUsername(String username);
 
-    User findById(Integer id);
+//    User findById(Integer id);
 
 //    @Query("FROM User u ")
 //    public Page<User> pageAll(Pageable pageable);

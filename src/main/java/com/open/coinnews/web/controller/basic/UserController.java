@@ -97,7 +97,7 @@ public class UserController {
     @AdminAuth(name="修改用户", orderNum=3, type="2")
     @RequestMapping(value="update/{id}", method= RequestMethod.GET)
     public String update(Model model, @PathVariable Integer id, HttpServletRequest request) {
-        User u = userService.findById(id);
+        User u = userService.findById(id).get();
         model.addAttribute("user", u);
         return "admin/user/update";
     }
@@ -106,7 +106,7 @@ public class UserController {
     @RequestMapping(value="update/{id}", method= RequestMethod.POST)
     public String update(Model model, @PathVariable Integer id, User user, HttpServletRequest request) {
         if(TokenTools.isNoRepeat(request)) {
-            User u = userService.findById(id);
+            User u = userService.findById(id).get();
             u.setIsAdmin(user.getIsAdmin());
 			u.setStatus(user.getStatus());
             u.setNickname(user.getNickname());
@@ -120,7 +120,7 @@ public class UserController {
     public @ResponseBody
     String delete(@PathVariable Integer id) {
         try {
-            userService.delete(id);
+            userService.deleteById(id);
             return "1";
         } catch (Exception e) {
             return "0";

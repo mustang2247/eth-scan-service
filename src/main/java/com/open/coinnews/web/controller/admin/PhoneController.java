@@ -6,16 +6,13 @@ package com.open.coinnews.web.controller.admin;
  * @Date Created in 13:57 2018/5/25
  */
 
-import com.alibaba.fastjson.JSON;
 import com.open.coinnews.app.model.Phone;
 import com.open.coinnews.app.service.IPhoneService;
 import com.open.coinnews.basic.auth.annotations.AdminAuth;
 import com.open.coinnews.basic.auth.annotations.Token;
-import com.open.coinnews.basic.auth.tools.SecurityUtil;
 import com.open.coinnews.basic.auth.tools.TokenTools;
 import com.open.coinnews.basic.exception.SystemException;
 import com.open.coinnews.basic.tools.ConfigTools;
-import com.open.coinnews.basic.tools.MyBeanUtils;
 import com.open.coinnews.basic.tools.PageableTools;
 import com.open.coinnews.basic.tools.ParamFilterTools;
 import org.slf4j.Logger;
@@ -30,8 +27,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 
 /**
  * 系统配置
@@ -128,7 +123,7 @@ public class PhoneController {
     String delete(@PathVariable Integer id) {
         try {
             logger.info(id.toString());
-            phoneService.delete(id);
+            phoneService.deleteById(id);
             return "1";
         } catch (Exception e) {
             return "0";

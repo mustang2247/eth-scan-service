@@ -7,12 +7,14 @@ import com.open.coinnews.app.model.LockPlanOperationsLog;
 import com.open.coinnews.app.model.TokenTranLog;
 import com.open.coinnews.app.service.*;
 import com.open.coinnews.basic.tools.ConfigTools;
+import com.open.coinnews.utils.SmsSendUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 任务处理
@@ -82,15 +84,17 @@ public class ScheduledTaskService {
 //            }else {
                 // 处理大户交易记录和通知
 //                BigBossAddr bigBossAddr = bigBossAddrService.findByPrivateTokenAdd(from);
-            TokenTranLog tokenTranLog = tokenTranLogService.findByToToken(to);
-                //dealBigBossTx(bigBossAddr,"1","1",1,1231546,10000000.0,10000000.0,"1");
+//                //dealBigBossTx(bigBossAddr,"1","1",1,1231546,10000000.0,10000000.0,"1");
 //                if (bigBossAddr != null){
-                if (tokenTranLog == null){
 //                    dealBigBossTx(bigBossAddr, from, to, value.doubleValue(), time * 1000,fromValue.doubleValue(),toValue.doubleValue(),txHash);
-                    dealBigBossTx(from, to, value.doubleValue(), time * 1000,fromValue.doubleValue(),toValue.doubleValue(),txHash);
-                }
-                //dealBigBossTx(bigBossAddr,"1","1",100000000,1231546,10000000.0,10000000.0,"1");
+////                    dealBigBossTx(from, to, value.doubleValue(), time * 1000,fromValue.doubleValue(),toValue.doubleValue(),txHash);
+//                }
 //            }
+
+            TokenTranLog tokenTranLog = tokenTranLogService.findByToToken(to);
+            if (tokenTranLog == null){
+                dealBigBossTx(from, to, value.doubleValue(), time * 1000,fromValue.doubleValue(),toValue.doubleValue(),txHash);
+            }
 
         });
     }
@@ -125,15 +129,15 @@ public class ScheduledTaskService {
         try {
             if (tokenTranLogService.findByTxHash(txHash) == null){
                 TokenTranLog tokenTranLog = new TokenTranLog(from, to, txHash, value, fromValue, new Date(), new Date(time));
-//                List<String> phoneList =  phoneService.findAllPhone();//获取所需要发送信息的手机号
-//                Double nowvalue= webConfigInfoService.findValue();//获取当前设置value
-                //判断交易值
-//                if(value >= nowvalue){
-//                    for(int i=0;i<phoneList.size();i++){
-//                        //发送短信通知
-//                        SmsSendUtil.sendSmsMessage("86"+phoneList.get(i),bigBossAddr.getPrivateTokenAdd()+"有大量交易："+value);
-//                    }
-//                }
+                List<String> phoneList =  phoneService.findAllPhone();//获取所需要发送信息的手机号
+                Double nowvalue= webConfigInfoService.findValue();//获取当前设置value
+//                判断交易值
+                if(value >= nowvalue){
+                    for(int i=0;i<phoneList.size();i++){
+                        //发送短信通知
+                        SmsSendUtil.sendSmsMessage("86"+phoneList.get(i),bigBossAddr.getPrivateTokenAdd()+"有大量交易："+value);
+                    }
+                }
                 tokenTranLogService.saveAndFlush(tokenTranLog);
             }
         }catch (Exception e){

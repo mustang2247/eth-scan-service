@@ -91,7 +91,7 @@ public class RoleController {
     @AdminAuth(name="修改角色", orderNum=3, type="2")
     @RequestMapping(value="update/{id}", method= RequestMethod.GET)
     public String update(Model model, @PathVariable Integer id, HttpServletRequest request) {
-        Role r = roleService.findById(id);
+        Role r = roleService.findById(id).get();
         model.addAttribute("role", r);
         return "admin/role/update";
     }
@@ -101,7 +101,7 @@ public class RoleController {
     public String update(Model model, @PathVariable Integer id, Role role, HttpServletRequest request) {
 //		Boolean isRepeat = (Boolean) request.getAttribute("isRepeat");
         if(TokenTools.isNoRepeat(request)) {
-            Role r = roleService.findById(id);
+            Role r = roleService.findById(id).get();
             r.setName(role.getName());
             roleService.save(r);
         }
@@ -113,7 +113,7 @@ public class RoleController {
     public @ResponseBody
     String delete(@PathVariable Integer id) {
         try {
-            roleService.delete(id);
+            roleService.deleteById(id);
             return "1";
         } catch (Exception e) {
             return "0";
