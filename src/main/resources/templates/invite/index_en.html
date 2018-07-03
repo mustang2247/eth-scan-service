@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="bookmark" href="/favicon.ico"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="/invite/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/invite/css/reset.css"/>
+    <link rel="stylesheet" href="/invite/css/inputAddr.css"/>
+    <title>Block 18</title>
+    <script src="/invite/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/invite/Scripts/crypto-js.js"></script>
+    <script src="/invite/Scripts/sha3.js"></script>
+    <script src="/invite/Scripts/sha3eth.js"></script>
+    <script src="/invite/Scripts/eth.js"></script>
+    <script src="/invite/Scripts/home.js"></script>
+</head>
+
+<body>
+<header class="header">中文</header>
+<div class="main container" th:switch="${systemStatus}">
+    <img class="main-logo" src="/invite/img/frec_logo.svg" alt=""/>
+    <input type="hidden" class="main-left" id="refererCode" th:value="${code}" />
+    <div th:case="${0}">
+        <!--<h2 class="main-text1">The world's first blockchain collection data fidelity platform</h2>-->
+        <h2 class="main-text1" th:text="${candyTitleEN}">The leader of the world blockchain community</h2>
+        <div class="main-btn">
+            <a th:href="${telegramUrl}" target="_blank">Join us on Telegram</a>
+        </div>
+        <h2 class="main-text2" th:text="'Join in ' + ${candyName} + ' telegram group will get ' + ${rewardPerNum} + ' ' + ${candyName} + '!'">Join in block 18 telegram group will get 30 18T!</h2>
+        <h2 class="main-text2" th:text="'Every time you invite new one to join us, you will get ' + ${rewardInviteNum} + ' ' + ${candyName} + '!'">Every time you invite new one to join us, you will get 30 18T!</h2>
+        <h2 class="main-text3" th:text="'The new one will get ' + ${rewardPerNum} + ' ' + ${candyName} + ', as well!'">The new one will get 30 18T, as well!</h2>
+        <div class="main-text4">
+            <text>Enter your ETH wallet address to</text>
+            <text class="main-text4-edu" th:text="'receive ' + ${rewardPerNum} + ' ' + ${candyName} + ' NOW!'">receive 30 18T NOW!</text>
+        </div>
+    </div>
+
+    <div th:case="*">
+        <h2 class="main-text1" th:text="${candyTitleEN}">The leader of the world blockchain community</h2>
+        <div class="main-btn">
+            <a th:href="${telegramUrl}" target="_blank">Join us on Telegram</a>
+        </div>
+        <h2 class="main-text2" >The event is over, please look forward to it!</h2>
+        <!--<h2 class="main-text2" th:text="'Join in block 18 telegram group will get ' + ${rewardPerNum} + ' 18T!'">Join in block 18 telegram group will get 30 18T!</h2>-->
+        <!--<h2 class="main-text2" th:text="'Every time you invite new one to join us, you will get ' + ${rewardInviteNum} + ' 18T!'">Every time you invite new one to join us, you will get 30 18T!</h2>-->
+        <!--<h2 class="main-text3" th:text="'The new one will get ' + ${rewardPerNum} + ' 18T, as well!'">The new one will get 30 18T, as well!</h2>-->
+        <div class="main-text4">
+            <text>Enter your ETH wallet address to</text>
+            <!--<text class="main-text4-edu" th:text="'receive ' + ${rewardPerNum} + ' 18T NOW!'">receive 30 18T NOW!</text>-->
+        </div>
+    </div>
+
+    <div class="main-input">
+        <input class="main-left" placeholder="Enter your ETH wallet address" id="token" type="text"/>
+        <div class="main-btn2">Submit</div>
+    </div>
+</div>
+
+</body>
+</html>

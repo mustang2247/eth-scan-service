@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="fragments/adminModel">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>修改信息</title>
+    <script type="text/javascript" src="/admin/business/invite-add.js"></script>
+    <script type="text/javascript" src="/tags/fm.tag.js"></script>
+    <link rel="stylesheet" type="text/css" href="/tags/fm.tag.css"/>
+
+</head>
+<body>
+<div th:fragment="content" th:remove="tag">
+    <div class="header lighter smaller blue">
+        <h3><i class="icon-plus"></i>&nbsp;修改信息</h3>
+        <div th:replace="admin/invite/nav :: content" th:remove="tag"></div>
+    </div>
+
+    <form method="POST" th:object="${datas}" id="dataForm" enctype="multipart/form-data">
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">文件上传路径：</div>
+                <input name="uploadPath" type="text" class="form-control" readonly="readonly" th:value="${datas.uploadPath}"/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">网站logo：</div>
+                <input name="appLogo" type="text" class="form-control" th:value="${datas.appLogo}"/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">网站基本URL配置:</div>
+                <input name="fileBaseUrl" type="text" class="form-control"
+                       th:value="${datas.fileBaseUrl}"></input>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">糖果名字:</div>
+                <input name="candyName" type="text" class="form-control"
+                       th:value="${datas.candyName}"></input>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">中文标题:</div>
+                <input name="candyTitleCN" type="text" class="form-control"
+                       th:value="${datas.candyTitleCN}"></input>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">英文标题:</div>
+                <input name="candyTitleEN" type="text" class="form-control"
+                       th:value="${datas.candyTitleEN}"></input>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">自己获得奖励：</div>
+                <input name="rewardPerNum" type="text" class="form-control"
+                       th:value="${datas.rewardPerNum}"/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">邀请人奖励奖励：</div>
+                <input name="rewardInviteNum" type="text" class="form-control"
+                       th:value="${datas.rewardInviteNum}"/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">个人获得奖励最大限制：</div>
+                <input name="rewardMaxNum" type="text" class="form-control" th:value="${datas.rewardMaxNum}"/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">telegram推广链接：</div>
+                <input name="telegramUrl" type="text" class="form-control" th:value="${datas.telegramUrl}"/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">ip限制：</div>
+                <input name="ipLimitNum" type="text" class="form-control" th:value="${datas.ipLimitNum}"/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">服务器开关：</div>
+                <input name="systemStatus" type="text" class="form-control" th:value="${datas.systemStatus}"/>
+            </div>
+        </div>
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">大户通知交易值：</div>
+                <input name="value" type="text" class="form-control" th:value="${datas.value}"/>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">确定提交</button>
+        <!--<button type="button" onclick="javascript:history.back(-1)" class="btn btn-default">返回上级</button>-->
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="bookmark" href="/favicon.ico"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="/invite/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/invite/css/reset.css"/>
+    <link rel="stylesheet" href="/invite/css/invitation.css?v=5"/>
+
+    <script src="/invite/Scripts/clipboard.min.js"></script>
+    <script src="/invite/Scripts/clipboard.js"></script>
+    <script src="/invite/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/invite/Scripts/lockplan.js"></script>
+
+    <title>18区</title>
+
+</head>
+<body>
+<!--<header class="header">En</header>-->
+<div class="main container" th:switch="${systemStatus}">
+    <img class="main-logo" src="/invite/img/logo_pc.svg" alt=""/>
+    <div th:case="${0}">
+        <h2 class="main-text1" >18区——创建全球区块链公链社区的第一本“护照”，总部位于新加坡。</h2>
+        <h2 class="main-text2" >旨在基于专业化的区块链社区服务，将全球数字资产进行无障碍的快速流通，构建起区块链新世界的核心入口！</h2>
+        <!--<h2 class="main-text3" th:text="'被推荐进群的朋友也可获得' + ${rewardPerNum} + '个' + ${candyName} + '！'">被推荐进群的朋友也可获得30个18T！</h2>-->
+        <h2 class="main-text3"><a th:href="${telegramUrl}" target="_blank" th:text="'加入Telegram群组了解' + '“18区共同成长计划”'">加入Telegram群组了解' + '“18区共同成长计划”</a></h2>
+        <h2 class="main-text4" >参与活动的以太坊网络地址：</h2>
+        <div class="main-input main-text5">
+            <input class="main-left" id="inviteCode" th:value="${code}" type="text"/>
+            <button class="main-btn2" id="copyCode" data-clipboard-target="#inviteCode" >复制</button>
+        </div>
+        <h2 class="main-text6" >锁仓地址，请把 18T转入这里！</h2>
+    </div>
+
+    <div th:case="*">
+        <!--<h2 class="main-text2" >活动已结束，敬请期待!</h2>-->
+        <!--<div class="main-input main-text5">-->
+            <!--<input class="main-left" id="inviteCode" th:value="'/' + ${code}" type="text"/>-->
+            <!--<button class="main-btn2" id="copyCode" data-clipboard-target="#inviteCode" >复制</button>-->
+        <!--</div>-->
+    </div>
+
+    <div class="main-input main-text7">
+        <input class="main-left" id="inviteUrl" th:value="${url}" type="text"/>
+        <button class="main-btn2" id="copyUrl"  data-clipboard-target="#inviteUrl">复制</button>
+    </div>
+
+
+    <!--<div >-->
+        <!--<h2 class="main-text4" >收益选择:</h2>-->
+
+        <!--<div class="main-input main-text5">-->
+            <!--&lt;!&ndash;下拉框设置    &ndash;&gt;-->
+            <!--<select name="收益选择">-->
+                <!--<option value="1" >6个月 5%</option>-->
+                <!--<option value="2" th:selected="selected" >1年 7%</option>   //预选设置-->
+                <!--<option value="3" >1年 10%</option>-->
+            <!--</select>-->
+        <!--</div>-->
+
+    <!--</div>-->
+
+    <div class="main-bottom">
+        <div class="main-bottom-left">
+            <text class="main-bottom-left-t1">已参与数量（18T）</text>
+            <text class="main-bottom-left-t2" th:text="${inviteCount}" >0</text>
+        </div>
+        <div class="main-bottom-right">
+            <text class="main-bottom-left-t1" th:text="'已赚取' + ${candyName} + '（枚数）'">已赚取18T（枚数）</text>
+            <text class="main-bottom-left-t2"  th:text="${inviteReward}" >0</text>
+        </div>
+    </div>
+</div>
+<div style="height: 60px"></div>
+
+</body>
+</html>

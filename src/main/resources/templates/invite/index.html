@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="bookmark" href="/favicon.ico"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="/invite/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/invite/css/reset.css"/>
+    <link rel="stylesheet" href="/invite/css/inputAddr.css"/>
+    <title>18区</title>
+
+    <script src="/invite/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/invite/Scripts/crypto-js.js"></script>
+    <script src="/invite/Scripts/sha3.js"></script>
+    <script src="/invite/Scripts/sha3eth.js"></script>
+    <script src="/invite/Scripts/eth.js"></script>
+    <script src="/invite/Scripts/lockhome.js"></script>
+</head>
+<body>
+
+<!--<header class="header">En</header>-->
+
+<div class="main container" th:switch="${systemStatus}">
+    <img class="main-logo" src="/invite/img/logo_pc.svg" alt=""/>
+    <!--<input type="hidden" class="main-left" id="refererCode" th:value="${code}" />-->
+
+    <div th:case="${0}">
+        <!--<h2 class="main-text1">全球首家区块链藏品数据保真平台——Freyr-Chain</h2>-->
+        <h2 class="main-text1" >全球区块链社区领航者</h2>
+        <div class="main-btn" style="width: 380px">
+            <a th:href="${telegramUrl}" target="_blank"  th:text="'加入Telegram群组了解' + '“18区共同成长计划”'"></a>
+        </div>
+        <h2 class="main-text2" >18区——创建全球区块链公链社区的第一本“护照”，总部位于新加坡。</h2>
+        <h2 class="main-text2" >旨在基于专业化的区块链社区服务，将全球数字资产进行无障碍的快速流通，构建起区块链新世界的核心入口！</h2>
+        <!--<h2 class="main-text3" th:text="'被推荐进群的朋友也可获得' + ${rewardPerNum} + '个' + ${candyName} + '！'">被推荐进群的朋友也可获得30个18T！</h2>-->
+        <!--<div class="main-text4">-->
+            <!--<text>请输入您参加活动的ETH接收地址：</text>-->
+            <!--&lt;!&ndash;<text class="main-text4-edu" th:text="'免费获得' + ${rewardPerNum} + '个' + ${candyName} + ''">免费获得30个18T</text>&ndash;&gt;-->
+        <!--</div>-->
+    </div>
+
+    <div th:case="*">
+        <h2 class="main-text1" th:text="${candyTitleCN}">全球区块链社区领航者</h2>
+        <div class="main-btn"  style="width: 380px">
+            <a  th:href="${telegramUrl}" target="_blank" th:text="'加入Telegram群组了解' + '“18区共同成长计划”'">加入Telegram群组了解“18区共同成长计划”</a>
+        </div>
+        <h2 class="main-text2" >活动已结束，敬请期待!</h2>
+        <div class="main-text4">
+            <text>请输入您的ETH接收地址</text>
+        </div>
+    </div>
+
+    <div class="main-text4" style="margin-bottom: 5px;margin-top: 10px">
+        <text>参与活动的以太坊网络地址：（此地址转入的锁仓周期为6个月，奖励比例为年化5%）</text>
+    </div>
+    <div class="main-input">
+        <input class="main-left" placeholder="您的以太坊网络地址" id="token1" type="text"/>
+        <div class="main-btn2" id="main-btn1">提交</div>
+    </div>
+
+    <div class="main-text4"  style="margin-bottom: 5px;margin-top: 10px">
+        <text>参与活动的以太坊网络地址：（此地址转入的锁仓周期为12个月，奖励比例为年化7%）</text>
+    </div>
+    <div class="main-input">
+        <input class="main-left" placeholder="您的以太坊网络地址" id="token2" type="text"/>
+        <div class="main-btn2" id="main-btn2">提交</div>
+    </div>
+    <div class="main-text4" style="margin-bottom: 5px;margin-top: 10px">
+        <text>参与活动的以太坊网络地址：（此地址转入的锁仓周期为24个月，奖励比例为年化10%）</text>
+    </div>
+    <div class="main-input">
+        <input class="main-left" placeholder="您的以太坊网络地址" id="token3" type="text"/>
+        <div class="main-btn2" id="main-btn3">提交</div>
+    </div>
+</div>
+<div style="height: 60px"></div>
+
+</body>
+</html>

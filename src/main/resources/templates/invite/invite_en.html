@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="bookmark" href="/favicon.ico"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="/invite/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/invite/css/reset.css"/>
+    <link rel="stylesheet" href="/invite/css/invitation.css?v=5"/>
+    <script src="/invite/Scripts/clipboard.min.js"></script>
+    <script src="/invite/Scripts/clipboard.js"></script>
+    <script src="/invite/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/invite/Scripts/invite.js"></script>
+
+    <title>Block 18</title>
+</head>
+<body>
+<header class="header">中文</header>
+<div class="main container" th:switch="${systemStatus}">
+    <img class="main-logo" src="/invite/img/frec_logo.svg" alt=""/>
+    <div th:case="${0}">
+        <h2 class="main-text1" th:text="'Join in ' + ${candyName} + ' telegram group will get ' + ${rewardPerNum} + ' ' + ${candyName} + '!'">Join in block 18 telegram group will get 30 18T!</h2>
+        <h2 class="main-text2" th:text="'Every time you invite new one to join us, you will get ' + ${rewardInviteNum} + ' ' + ${candyName} + '!'">Every time you invite new one to join us, you will get 30 18T!</h2>
+        <h2 class="main-text3" th:text="'The new one will get ' + ${rewardPerNum} + ' ' + ${candyName} + ', as well!'">The new one will get 30 18T, as well!</h2>
+
+        <h2 class="main-text3">1. Join <a th:href="${telegramUrl}" target="_blank" th:text="${candyName} + ' Telegram Channel'">18T Telegram Channel</a>
+        </h2>
+        <h2 class="main-text4" th:text="'2. Send the following code in the channel to receive ' + ${rewardPerNum} + ' ' + ${candyName} + ' NOW!'">2. Send the following code in the channel to receive 30 18T NOW!</h2>
+        <div class="main-input main-text5">
+            <input class="main-left" id="inviteCode" th:value="'/' + ${code}" type="text"/>
+            <button class="main-btn2" id="copyCode" data-clipboard-target="#inviteCode" >Copy</button>
+        </div>
+        <h2 class="main-text6" th:text="'3. Share the following link to your friends, each successful recommendation will give ' + ${rewardInviteNum} + ' ' + ${candyName} + ' to inviter!'">3. Share the following link to your friends, each successful recommendation will give 30 18T to inviter!</h2>
+    </div>
+
+    <div th:case="*">
+        <!--<h2 class="main-text1" th:text="'Join in block 18 telegram group will get ' + ${rewardPerNum} + ' 18T!'">Join in block 18 telegram group will get 30 18T!</h2>-->
+        <!--<h2 class="main-text2" th:text="'Every time you invite new one to join us, you will get ' + ${rewardInviteNum} + ' 18T!'">Every time you invite new one to join us, you will get 30 18T!</h2>-->
+        <!--<h2 class="main-text3" th:text="'The new one will get ' + ${rewardPerNum} + ' 18T, as well!'">The new one will get 30 18T, as well!</h2>-->
+        <h2 class="main-text2" >The event is over, please look forward to it!</h2>
+        <!--<h2 class="main-text3">1. Join <a th:href="${telegramUrl}" target="_blank">18T Telegram Channel</a></h2>-->
+        <!--<h2 class="main-text4" th:text="'2. Send the following code in the channel to receive ' + ${rewardPerNum} + ' 18T NOW!'">2. Send the following code in the channel to receive 30 18T NOW!</h2>-->
+        <div class="main-input main-text5">
+            <input class="main-left" id="inviteCode" th:value="'/' + ${code}" type="text"/>
+            <button class="main-btn2" id="copyCode" data-clipboard-target="#inviteCode" >Copy</button>
+        </div>
+        <!--<h2 class="main-text6" th:text="'3. Share the following link to your friends, each successful recommendation will give ' + ${rewardInviteNum} + ' 18T to inviter!'">3. Share the following link to your friends, each successful recommendation will give 30 18T to inviter!</h2>-->
+    </div>
+
+    <div class="main-input main-text7">
+        <input class="main-left" id="inviteUrl" th:value="${url}" type="text"/>
+        <button class="main-btn2" id="copyUrl" data-clipboard-target="#inviteUrl" >Copy</button>
+    </div>
+    <div class="main-bottom" th:switch="${rewardMaxNum}">
+        <div class="main-bottom-left">
+            <text class="main-bottom-left-t1">Invited</text>
+            <text class="main-bottom-left-t2" th:text="${inviteCount}">0</text>
+        </div>
+        <div class="main-bottom-right" th:case="${-1}">
+            <text class="main-bottom-left-t1" th:text="'Earned ' + ${candyName}">Earned 18T</text>
+            <text class="main-bottom-left-t2"  th:text="${inviteReward}" >0</text>
+        </div>
+        <div class="main-bottom-right" th:case="*">
+            <text class="main-bottom-left-t1" th:text="'Earned ' + ${candyName}">Earned 18T</text>
+            <text class="main-bottom-left-t2"  th:text="${inviteReward}" >0</text>
+            <text class="main-bottom-left-t3" th:text="'Up to ' + ${rewardMaxNum} + ' ' + ${candyName}" >Up to 1000 18T</text>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

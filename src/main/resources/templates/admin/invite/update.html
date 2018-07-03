@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="fragments/adminModel">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>修改信息</title>
+    <!--<link rel="stylesheet" href="/editor.md-master/css/editormd.css"/>-->
+    <!--<script type="text/javascript" src="/editor.md-master/editormd.js"></script>-->
+    <script type="text/javascript" src="/admin/business/invite-add.js"></script>
+    <script type="text/javascript" src="/tags/fm.tag.js"></script>
+    <link rel="stylesheet" type="text/css" href="/tags/fm.tag.css"/>
+
+    <!--<script type="text/javascript">-->
+        <!--$(function () {-->
+            <!--$("#my-editormd").find("textarea").text($("textarea[name='mdContent']").text());-->
+        <!--});-->
+    <!--</script>-->
+</head>
+<body>
+<div th:fragment="content" th:remove="tag">
+    <div class="header lighter smaller blue">
+        <h3><i class="icon-plus"></i>&nbsp;修改信息</h3>
+        <div th:replace="admin/invite/nav :: content" th:remove="tag"></div>
+    </div>
+
+    <form method="POST" th:object="${article}" id="dataForm" enctype="multipart/form-data">
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">eth token：</div>
+                <input name="token" type="text" class="form-control" readonly="readonly" th:value="${article.token}"/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">推荐人:</div>
+                <input name="refererCode" type="text" class="form-control" readonly="readonly"
+                       th:value="${article.refererCode}"></input>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">邀请码：</div>
+                <input name="inviteCode" type="text" class="form-control" readonly="readonly"
+                       th:value="${article.inviteCode}"/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">邀请人数：</div>
+                <input name="inviteCount" type="text" class="form-control"
+                       th:value="${article.inviteCount}"/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">邀请奖励：</div>
+                <input name="inviteReward" type="text" class="form-control" th:value="${article.inviteReward}"/>
+            </div>
+        </div>
+
+        <div class="form-group form-group-lg">
+            <div class="input-group">
+                <div class="input-group-addon">语言：</div>
+                <input name="l" type="text" class="form-control" readonly="readonly" th:value="${article.l}"/>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">确定提交</button>
+        <button type="button" onclick="javascript:history.back(-1)" class="btn btn-default">返回上级</button>
+    </form>
+</div>
+</body>
+</html>
