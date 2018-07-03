@@ -61,6 +61,7 @@ public class Web3jService {
         this.bigBossAddrService = bigBossAddrService;
 //        this.contractAddress = contractAddress.toLowerCase();
         web3 = Web3j.build(new HttpService(url));
+
         log.info("init web3j success! " + "startBlockNumber: " +
                 startBlockNumber + "url:  " +
                 startBlockNumber + "contractAddress: " +
@@ -116,7 +117,11 @@ public class Web3jService {
                 block.getTransactions().forEach(t -> {
                     Transaction tx = (Transaction) t.get();
                     executor.submit(() -> {
-                        handleTx(tx, block.getTimestamp().longValue(), callBack, nextBlockNumber);
+                        try {
+                            handleTx(tx, block.getTimestamp().longValue(), callBack, nextBlockNumber);
+                        }catch (Exception e){
+                            log.error(e.getMessage());
+                        }
                         latch.countDown();
                     });
                 });
